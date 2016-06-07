@@ -52,18 +52,47 @@ class NameManager
     */
     public function saveCodename()
     {
-        if (isset($_POST['name'])) {
-            if (in_array(ucfirst(strtolower($_POST['name'])), $_SESSION['names'])) {
-                return "This name is already there";
+        $nameSaved = false;
+        $adjectiveSaved = false;
+
+        $nameAlreadyThere = false;
+        $adjectiveAlreadyThere = false;
+
+        if (strlen($_POST['adjective']) > 0) {
+            if (!in_array(ucfirst(strtolower($_POST['adjective'])), $_SESSION['adjectives'])) {
+                $_SESSION['adjectives'][] = ucfirst(strtolower($_POST['adjective']));
+                file_put_contents('data/adjectives', ','.$_POST['adjective'], FILE_APPEND);
+                $adjectiveSaved = true;
+            } else {
+                $adjectiveAlreadyThere = true;
             }
         }
 
-        if (isset($_POST['adjective'])) {
-            if (in_array(ucfirst(strtolower($_POST['adjective'])), $_SESSION['adjectives'])) {
-                return "This adjective is already there";
+        if (strlen($_POST['name']) > 0) {
+            if (!in_array(ucfirst(strtolower($_POST['name'])), $_SESSION['names'])) {
+                $_SESSION['names'][] = ucfirst(strtolower($_POST['name']));
+                file_put_contents('data/names', ','.$_POST['name'], FILE_APPEND);
+                $nameSaved = true;
+            } else {
+                $nameAlreadyThere = true;
             }
         }
 
-        return var_dump($_SESSION['adjectives']);
+        if ($nameSaved && $adjectiveSaved) {
+            return "All good, thanks!";
+        } elseif ($nameSaved) {
+            if ($adjectiveAlreadyThere){
+                return "Saved the name, thanks! but the adjective is already there";
+            }
+            return "All good, thanks!";
+        } elseif ($adjectiveSaved) {
+            if ($nameAlreadyThere){
+                return "Saved the adjective, thanks! but the name is already there";
+            }
+            return "All good, thanks!";
+        } else {
+            return "Sorry, someone has read your mind, those guys are already on the system!";
+        }
+        
     }
 }
