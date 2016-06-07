@@ -45,4 +45,25 @@ class NameManager
             return $randomAdjective . ' ' . $randomName;
         }
     }
+
+    /**
+    * Saves user-defined codename
+    * 
+    */
+    public function saveCodename()
+    {
+        if (isset($_POST['name'])) {
+            if (in_array(ucfirst(strtolower($_POST['name'])), $_SESSION['names'])) {
+                return "This name is already there";
+            }
+        }
+
+        if (isset($_POST['adjective'])) {
+            if (in_array(ucfirst(strtolower($_POST['adjective'])), $_SESSION['adjectives'])) {
+                return "This adjective is already there";
+            }
+        }
+
+        return var_dump($_SESSION['adjectives']);
+    }
 }
