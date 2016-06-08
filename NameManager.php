@@ -91,23 +91,29 @@ class NameManager
         //Or it might be one of them.
         //It might also be that one of them is already in the file
         if ($nameSaved && $adjectiveSaved) {
-            $response['msg'] =  'All good, thanks!';
+            $response['msg'] =  'Thanks!';
+            $response['status'] =  1;
         } elseif ($nameSaved) {
             if ($adjectiveAlreadyThere){
-                $response['msg'] =  'aved the name, thanks! but the adjective is already there';
+                $response['msg'] =  'Saved the name, thanks! but the adjective is already there';
+                $response['status'] =  0;
             }
             else {
-                $response['msg'] =  'All good, thanks!';
+                $response['msg'] =  'Thanks!';
+                $response['status'] =  1;
             }
         } elseif ($adjectiveSaved) {
             if ($nameAlreadyThere){
                 $response['msg'] =  'Saved the adjective, thanks! but the name is already there';
+                $response['status'] =  0;
             }
             else {
-                $response['msg'] =  'All good, thanks!';
+                $response['msg'] =  'Thanks!';
+                $response['status'] =  1;
             }
         } else {
-            $response['msg'] =  'Sorry, someone has read your mind, those guys are already on the system!';
+            $response['msg'] =  'Sorry, someone has read your mind, your entry is already on the system!';
+            $response['status'] =  0;
         }
         
         //Sending the arrays after the modification to the browser to keep it updated

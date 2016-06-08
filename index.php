@@ -45,7 +45,8 @@ $nameManager = new NameManager();
                 </button>
             </div>
         </div>
-        <form method="post" action="CallManager.php" class="pure-form " hidden>
+
+        <form method="post" action="CallManager.php" class="pure-form" hidden>
             <fieldset>
                 <legend>Cool! let's add it to the app</legend>
                 <div class="pure-g">
@@ -58,7 +59,10 @@ $nameManager = new NameManager();
                         <input type="text" name="name" id="name" placeholder="name">
                     </div>
                 </div>
-                <button type="button" onclick="sendName()" class="pure-button button-xlarge button-success"> Send </button>
+                <button type="button" id="btn-save" 
+                        onclick="sendName()" class="pure-button button-xlarge button-success"> 
+                    Send
+                </button>
             </fieldset>
         </form>
 
@@ -85,6 +89,10 @@ $nameManager = new NameManager();
                     return false;
                 }
                 //Sending the form data to the server through an AJAX request
+                document.querySelector('#btn-save').setAttribute('disabled', true);
+                document.querySelector('#btn-save').innerHTML = '<div class="cssload-container">'+
+                    '<div class="cssload-speeding-wheel"></div></div>';
+
                 httpRequest = new XMLHttpRequest();
                 httpRequest.onreadystatechange = tellUser;
                 httpRequest.open("POST", "CallManager.php");
@@ -98,18 +106,30 @@ $nameManager = new NameManager();
                 if (httpRequest.readyState === XMLHttpRequest.DONE) {
                     if (httpRequest.status === 200) {
                         var result = JSON.parse(httpRequest.responseText);
-                        alert(result.msg);
+                        
+                        if (result.status == 1) {
+                            document.querySelector('#btn-save').textContent = result.msg;
+                            window.setTimeout(function() {
+                                    document.querySelector('#btn-save').textContent = "Send";
+                                }, 3000);
+                        }
+                        else {
+                            alert(result.msg);
+                        }
+
                         names = result.names;
                         adjectives = result.adjectives;
 
                         document.querySelector("#name").value = "";
                         document.querySelector("#adjective").value = "";
+                        document.querySelector('#btn-save').removeAttribute('disabled');
                     } else {
                         alert("I can't convince the server to save your entries at the moment, sorry :(");
                     }
                 }
             }
 
+            //Shows or hides the form when the "I have an idea" button is clicked
             function showForm() {
                 if (document.querySelector('form').hasAttribute('hidden')) {
                     document.querySelector('form').removeAttribute('hidden');
@@ -120,6 +140,7 @@ $nameManager = new NameManager();
                 }
             }
 
+            //Select the suggested name when clicked
             function selectText(containerid) {
                 if (document.selection) {
                     var range = document.body.createTextRange();
