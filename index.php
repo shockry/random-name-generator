@@ -141,6 +141,9 @@ $nameManager = new NameManager();
                 } else {
                     document.querySelector('form').setAttribute('hidden', '');
                     document.querySelector('#btn-show-form').textContent = "Hey, I have an idea!";
+                    document.querySelector("#name").value = "";
+                    document.querySelector("#adjective").value = "";
+                    document.querySelector('#result-message').setAttribute('hidden', '');
                 }
             }
 

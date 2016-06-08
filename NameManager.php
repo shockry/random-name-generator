@@ -86,10 +86,12 @@ class NameManager
 
         $response = array();
 
-        //Filter out to see what has happened
-        //It might be that both a name and an adjective were inserted into the form.
-        //Or it might be one of them.
-        //It might also be that one of them is already in the file
+        /*
+        Filter out to see what has happened
+        It might be that both a name and an adjective were inserted into the form.
+        Or it might be one of them.
+        It might also be that one of them is already in the file
+        */
         if ($nameSaved && $adjectiveSaved) {
             $response['msg'] =  'Thanks!';
             $response['status'] =  1;
