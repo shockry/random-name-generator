@@ -31,13 +31,20 @@ $nameManager = new NameManager();
 
             //Handles saving new data to the system
             function sendName() {
+                var nameValue = document.querySelector("#name").value;
+                var adjectiveValue = document.querySelector("#adjective").value;
+
+                if (nameValue == "" && adjectiveValue == "") {
+                    alert("Can't go with these fields are both empty");
+                    return false;
+                }
                 //Sending the form data to the server through an AJAX request
                 httpRequest = new XMLHttpRequest();
                 httpRequest.onreadystatechange = tellUser;
                 httpRequest.open("POST", "CallManager.php");
                 httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                httpRequest.send("name=" + encodeURIComponent(document.querySelector("#name").value) +
-                "&adjective=" + encodeURIComponent(document.querySelector("#adjective").value) );
+                httpRequest.send("name=" + encodeURIComponent(nameValue) +
+                "&adjective=" + encodeURIComponent(adjectiveValue) );
             }
 
             function tellUser() {
@@ -48,6 +55,9 @@ $nameManager = new NameManager();
                         alert(result.msg);
                         names = result.names;
                         adjectives = result.adjectives;
+
+                        document.querySelector("#name").value = "";
+                        document.querySelector("#adjective").value = "";
                     } else {
                         alert("I can't convince the server to save your entries at the moment, sorry :(");
                     }
