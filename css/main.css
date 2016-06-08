@@ -90,15 +90,12 @@ form {
     margin-top: 5pt;
 }
 
-.msg-warn {
+.msg {
+    margin:10pt;
     color: #9F6000;
     background-color: #FEEFB3;
     padding: 8pt;
     border-radius: 4px;
-}
-
-.msg {
-    margin:10pt;
 }
 
 /*Loader animation*/

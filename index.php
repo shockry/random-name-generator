@@ -47,11 +47,7 @@ $nameManager = new NameManager();
         </div>
 
         <form method="post" action="CallManager.php" class="pure-form" hidden>
-            <div class="pure-g msg">
-                <div class="pure-u-1">
-                    <span class="msg-warn">Bro :D</span>
-                </div>
-            </div>
+            <div class="msg" id="result-message" hidden></div>
             <fieldset>
                 <legend>Cool! let's add it to the app</legend>
                 <div class="pure-g">
@@ -114,12 +110,15 @@ $nameManager = new NameManager();
                         
                         if (result.status == 1) {
                             document.querySelector('#btn-save').textContent = result.msg;
+                            document.querySelector("#result-message").setAttribute('hidden', true);
                             window.setTimeout(function() {
                                     document.querySelector('#btn-save').textContent = "Send";
                                 }, 3000);
                         }
                         else {
-                            alert(result.msg);
+                            document.querySelector('#btn-save').textContent = "Send";
+                            document.querySelector("#result-message").textContent = result.msg;
+                            document.querySelector("#result-message").removeAttribute('hidden');
                         }
 
                         names = result.names;
