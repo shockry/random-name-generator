@@ -25,7 +25,7 @@ $nameManager = new NameManager();
         </div>
         <div class="pure-g">
             <div class="pure-u-1">
-                <span id="codename"> <?= $nameManager->getCodename(); ?> </span>
+                <span id="codename" onclick="selectText('codename')"> <?= $nameManager->getCodename(); ?> </span>
             </div>
         </div>
         <hr>
@@ -117,6 +117,18 @@ $nameManager = new NameManager();
                 } else {
                     document.querySelector('form').setAttribute('hidden', '');
                     document.querySelector('#btn-show-form').textContent = "Hey, I have an idea!";
+                }
+            }
+
+            function selectText(containerid) {
+                if (document.selection) {
+                    var range = document.body.createTextRange();
+                    range.moveToElementText(document.getElementById(containerid));
+                    range.select();
+                } else if (window.getSelection) {
+                    var range = document.createRange();
+                    range.selectNode(document.getElementById(containerid));
+                    window.getSelection().addRange(range);
                 }
             }
         </script>
