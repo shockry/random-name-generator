@@ -6,11 +6,64 @@ $nameManager = new NameManager();
 ?>
 
 <html>
-    <head></head>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+        <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
+        <![endif]-->
+        <!--[if gt IE 8]><!-->
+            <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+        <!--<![endif]-->
+        <style>
+            body {
+                text-align:center;
+                text-shadow: 0 1px 0 #fff;
+                background:url('img/cork-wallet.png');
+            }
+
+            #codename {
+                font-size: 60pt;
+                font-weight: 800;
+            }
+
+            #suggestion-title {
+                font-size: 20pt;
+                padding: 0 10% 0 10%;
+            }
+
+            hr {
+                border: 0;
+                height: 1px;
+                background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+            }
+            .button-xlarge {
+                font-size: 125%;
+            }
+
+            .pure-button {
+                border-radius: 4px;
+            }
+        </style>
+    </head>
     <body>
-        <h3 id="codename"> <?= $nameManager->getCodename(); ?> </h3>
-        <button type="button" onclick="getCodename()"> Next, please </button>
-        <form method="post" action="CallManager.php">
+        <div class="pure-g">
+            <div class="pure-u-1">
+                <span id="suggestion-title"> Here's a suggestion </span>
+            </div>
+        </div>
+        <div class="pure-g">
+            <div class="pure-u-1">
+                <span id="codename"> <?= $nameManager->getCodename(); ?> </span>
+            </div>
+        </div>
+        <hr>
+        <div class="pure-g">
+            <div class="pure-u-1">
+                <button type="button" class="pure-button button-xlarge pure-button-primary" onclick="getCodename()"> Next, please </button>
+            </div>
+        </div>
+        <form method="post" action="CallManager.php" class="pure-form" hidden>
             <input type="text" name="adjective" id="adjective" placeholder="adjective">
             <input type="text" name="name" id="name" placeholder="name">
             <button type="button" onclick="sendName()"> Send </button>
