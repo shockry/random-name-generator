@@ -1,0 +1,91 @@
+body {
+    text-align:center;
+    text-shadow: 0 1px 0 #fff;
+    background: url('../img/bg.png');
+    padding-top: 2%;
+}
+
+#codename {
+    font-size: 50pt;
+    font-weight: 800;
+}
+
+#suggestion-title {
+    font-size: 20pt;
+    padding: 0 10% 0 10%;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.button-xlarge {
+    font-size: 130%;
+}
+
+.pure-button {
+    border-radius: 4px;
+    margin: 3pt;
+}
+
+.button-warning,
+.button-success {
+    color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.pure-button-primary {
+    margin-bottom: 5pt;
+}
+
+.button-warning {
+    background: rgb(223, 117, 20);
+}
+
+.button-success {
+    background: rgb(28, 184, 65);
+    padding-left: 50pt;
+    padding-right: 50pt;
+}
+
+input {
+    margin-bottom:3pt;
+    padding: 0.5em 0.6em;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px #ddd;
+    border-radius: 4px;
+    vertical-align: middle;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+@media only screen and (max-width : 480px) {
+    .pure-form input:not([type]),
+    .pure-form input[type="text"],
+    .pure-form input[type="password"],
+    .pure-form input[type="email"],
+    .pure-form input[type="url"],
+    .pure-form input[type="date"],
+    .pure-form input[type="month"],
+    .pure-form input[type="time"],
+    .pure-form input[type="datetime"],
+    .pure-form input[type="datetime-local"],
+    .pure-form input[type="week"],
+    .pure-form input[type="number"],
+    .pure-form input[type="search"],
+    .pure-form input[type="tel"],
+    .pure-form input[type="color"],
+    .pure-form label {
+        margin-bottom: 3pt;
+        display: inline-block;
+    }
+}
+
+form {
+    margin-top: 5pt;
+}
