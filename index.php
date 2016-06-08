@@ -11,19 +11,14 @@ $nameManager = new NameManager();
         <h3 id="codename"> <?= $nameManager->getCodename(); ?> </h3>
         <button type="button" onclick="getCodename()"> Next, please </button>
         <form method="post" action="CallManager.php">
-            <input type="text" name="adjective" placeholder="adjective">
-            <input type="text" name="name" placeholder="name">
-            <button type="button" value="Send">
+            <input type="text" name="adjective" id="adjective" placeholder="adjective">
+            <input type="text" name="name" id="name" placeholder="name">
+            <button type="button" onclick="sendName()"> Send </button>
         </form>
 
         <script type="text/javascript">
             names = <?= json_encode($nameManager->getData('names')); ?>;
             adjectives = <?= json_encode($nameManager->getData('adjectives')); ?>;
-
-            function getCodename() {
-            
-              console.log(names);
-            }
 
             function getCodename() {
                 //Generate some random integer
@@ -32,7 +27,31 @@ $nameManager = new NameManager();
                 var randomAdjective = adjectives[Math.floor((Math.random() * adjectives.length))];
 
                 document.querySelector("#codename").textContent = randomAdjective + ' ' + randomName;
-                
+            }
+
+            //Handles saving new data to the system
+            function sendName() {
+                //Sending the form data to the server through an AJAX request
+                httpRequest = new XMLHttpRequest();
+                httpRequest.onreadystatechange = tellUser;
+                httpRequest.open("POST", "CallManager.php");
+                httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                httpRequest.send("name=" + encodeURIComponent(document.querySelector("#name").value) +
+                "&adjective=" + encodeURIComponent(document.querySelector("#adjective").value) );
+            }
+
+            function tellUser() {
+                //When the request finishes, re-populate the names and adjectives arrays with the new data
+                if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                    if (httpRequest.status === 200) {
+                        var result = JSON.parse(httpRequest.responseText);
+                        alert(result.msg);
+                        names = result.names;
+                        adjectives = result.adjectives;
+                    } else {
+                        alert("I can't convince the server to save your entries at the moment, sorry :(");
+                    }
+                }
             }
         </script>
     </body>

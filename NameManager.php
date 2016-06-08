@@ -78,21 +78,32 @@ class NameManager
             }
         }
 
+        $response = array();
+
         if ($nameSaved && $adjectiveSaved) {
-            return "All good, thanks!";
+            $response['msg'] =  'All good, thanks!';
         } elseif ($nameSaved) {
             if ($adjectiveAlreadyThere){
-                return "Saved the name, thanks! but the adjective is already there";
+                $response['msg'] =  'aved the name, thanks! but the adjective is already there';
             }
-            return "All good, thanks!";
+            else {
+                $response['msg'] =  'All good, thanks!';
+            }
         } elseif ($adjectiveSaved) {
             if ($nameAlreadyThere){
-                return "Saved the adjective, thanks! but the name is already there";
+                $response['msg'] =  'Saved the adjective, thanks! but the name is already there';
             }
-            return "All good, thanks!";
+            else {
+                $response['msg'] =  'All good, thanks!';
+            }
         } else {
-            return "Sorry, someone has read your mind, those guys are already on the system!";
+            $response['msg'] =  'Sorry, someone has read your mind, those guys are already on the system!';
         }
         
+        //Sending the arrays after the modification to the browser to keep it updated
+        $response['names'] = $_SESSION['names'];
+        $response['adjectives'] = $_SESSION['adjectives'];
+
+        return json_encode($response);
     }
 }
