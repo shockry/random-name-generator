@@ -46,7 +46,7 @@ $nameManager = new NameManager();
             </div>
         </div>
 
-        <form method="post" action="CallManager.php" class="pure-form" hidden>
+        <form method="post" action="CallManager.php" class="pure-form" onsubmit="sendName(); return false;"  hidden>
             <div class="msg" id="result-message" hidden></div>
             <fieldset>
                 <legend>Cool! let's add it to the app</legend>
@@ -60,8 +60,8 @@ $nameManager = new NameManager();
                         <input type="text" name="name" id="name" placeholder="name">
                     </div>
                 </div>
-                <button type="button" id="btn-save" 
-                        onclick="sendName()" class="pure-button button-xlarge button-success"> 
+                <button type="submit" id="btn-save" 
+                        class="pure-button button-xlarge button-success"> 
                     Send
                 </button>
             </fieldset>
