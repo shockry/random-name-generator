@@ -34,7 +34,7 @@ $nameManager = new NameManager();
                 var nameValue = document.querySelector("#name").value;
                 var adjectiveValue = document.querySelector("#adjective").value;
 
-                if (nameValue == "" && adjectiveValue == "") {
+                if (nameValue === "" && adjectiveValue === "") {
                     alert("Can't go with these fields are both empty");
                     return false;
                 }

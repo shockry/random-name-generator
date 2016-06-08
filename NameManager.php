@@ -42,7 +42,7 @@ class NameManager
         } elseif ($part == 'adjective') {
             return $randomAdjective;
         } else {
-            return $randomAdjective . ' ' . $randomName;
+            return htmlspecialchars($randomAdjective) . ' ' . htmlspecialchars($randomName);
         }
     }
 
