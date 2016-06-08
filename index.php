@@ -67,6 +67,15 @@ $nameManager = new NameManager();
             </fieldset>
         </form>
 
+        <div id="footer">
+            <label> Created By <a href="https://shockry.blogspot.com.eg/" target="_blank"> Shokry</a> .
+                <a href="https://github.com/shockry/random-name-generator" target="_blank">
+                    You can make this guy better.
+                </a>
+                <img src="img/github.png" width="16" height="16">
+             </label>
+        </div>
+
         <script type="text/javascript">
             names = <?= json_encode($nameManager->getData('names')); ?>;
             adjectives = <?= json_encode($nameManager->getData('adjectives')); ?>;

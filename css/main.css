@@ -98,6 +98,14 @@ form {
     border-radius: 4px;
 }
 
+#footer {
+    margin-top: 20pt;
+}
+
+#footer, #footer a {
+    color: #444;
+}
+
 /*Loader animation*/
 
 .cssload-container {
