@@ -90,6 +90,17 @@ form {
     margin-top: 5pt;
 }
 
+.msg-warn {
+    color: #9F6000;
+    background-color: #FEEFB3;
+    padding: 8pt;
+    border-radius: 4px;
+}
+
+.msg {
+    margin:10pt;
+}
+
 /*Loader animation*/
 
 .cssload-container {

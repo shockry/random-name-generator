@@ -47,6 +47,11 @@ $nameManager = new NameManager();
         </div>
 
         <form method="post" action="CallManager.php" class="pure-form" hidden>
+            <div class="pure-g msg">
+                <div class="pure-u-1">
+                    <span class="msg-warn">Bro :D</span>
+                </div>
+            </div>
             <fieldset>
                 <legend>Cool! let's add it to the app</legend>
                 <div class="pure-g">
