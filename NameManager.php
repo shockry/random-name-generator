@@ -22,7 +22,7 @@ class NameManager
             return $_SESSION[$type];
         } else {
             $data = file_get_contents('data/'.$type);
-            return $data? explode(',', $data): array();
+            return $data? explode('~', $data): array();
         }
     }
 
@@ -64,7 +64,7 @@ class NameManager
             if (!in_array($newAdjective, $_SESSION['adjectives'])) {
                 //If not, add it to the session and append it to the approperiate file
                 $_SESSION['adjectives'][] = $newAdjective;
-                file_put_contents('data/adjectives', ','.$newAdjective, FILE_APPEND);
+                file_put_contents('data/adjectives', '~'.$newAdjective, FILE_APPEND);
                 $adjectiveSaved = true;
             } else {
                 $adjectiveAlreadyThere = true;
@@ -77,7 +77,7 @@ class NameManager
             if (!in_array($newName, $_SESSION['names'])) {
                 //If not, add it to the session and append it to the approperiate file
                 $_SESSION['names'][] = $newName;
-                file_put_contents('data/names', ','.$newName, FILE_APPEND);
+                file_put_contents('data/names', '~'.$newName, FILE_APPEND);
                 $nameSaved = true;
             } else {
                 $nameAlreadyThere = true;
