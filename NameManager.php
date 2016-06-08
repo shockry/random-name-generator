@@ -59,9 +59,12 @@ class NameManager
         $adjectiveAlreadyThere = false;
 
         if (strlen($_POST['adjective']) > 0) {
-            if (!in_array(ucfirst(strtolower($_POST['adjective'])), $_SESSION['adjectives'])) {
-                $_SESSION['adjectives'][] = ucfirst(strtolower($_POST['adjective']));
-                file_put_contents('data/adjectives', ','.$_POST['adjective'], FILE_APPEND);
+            //Check to see if the adjective is already in the app
+            $newAdjective = ucfirst(strtolower($_POST['adjective']));
+            if (!in_array($newAdjective, $_SESSION['adjectives'])) {
+                //If not, add it to the session and append it to the approperiate file
+                $_SESSION['adjectives'][] = $newAdjective;
+                file_put_contents('data/adjectives', ','.$newAdjective, FILE_APPEND);
                 $adjectiveSaved = true;
             } else {
                 $adjectiveAlreadyThere = true;
@@ -69,9 +72,12 @@ class NameManager
         }
 
         if (strlen($_POST['name']) > 0) {
-            if (!in_array(ucfirst(strtolower($_POST['name'])), $_SESSION['names'])) {
-                $_SESSION['names'][] = ucfirst(strtolower($_POST['name']));
-                file_put_contents('data/names', ','.$_POST['name'], FILE_APPEND);
+            //Check to see if the name is already in the app
+            $newName = ucfirst(strtolower($_POST['name']));
+            if (!in_array($newName, $_SESSION['names'])) {
+                //If not, add it to the session and append it to the approperiate file
+                $_SESSION['names'][] = $newName;
+                file_put_contents('data/names', ','.$newName, FILE_APPEND);
                 $nameSaved = true;
             } else {
                 $nameAlreadyThere = true;
@@ -80,6 +86,10 @@ class NameManager
 
         $response = array();
 
+        //Filter out to see what has happened
+        //It might be that both a name and an adjective were inserted into the form.
+        //Or it might be one of them.
+        //It might also be that one of them is already in the file
         if ($nameSaved && $adjectiveSaved) {
             $response['msg'] =  'All good, thanks!';
         } elseif ($nameSaved) {

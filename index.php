@@ -44,7 +44,7 @@ $nameManager = new NameManager();
                 httpRequest.open("POST", "CallManager.php");
                 httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 httpRequest.send("name=" + encodeURIComponent(nameValue) +
-                "&adjective=" + encodeURIComponent(adjectiveValue) );
+                "&adjective=" + encodeURIComponent(adjectiveValue));
             }
 
             function tellUser() {
