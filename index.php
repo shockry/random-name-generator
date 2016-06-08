@@ -82,8 +82,8 @@ $nameManager = new NameManager();
 
             //Handles saving new data to the system
             function sendName() {
-                var nameValue = document.querySelector("#name").value;
-                var adjectiveValue = document.querySelector("#adjective").value;
+                var nameValue = document.querySelector("#name").value.trim();
+                var adjectiveValue = document.querySelector("#adjective").value.trim();
 
                 if (nameValue === "" && adjectiveValue === "") {
                     alert("Can't go with these fields are both empty");
