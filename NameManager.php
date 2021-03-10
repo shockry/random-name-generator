@@ -52,13 +52,26 @@ class NameManager
     */
     public function saveCodename()
     {
+        $MAX_LENGTH = 128;
+        
         $nameSaved = false;
         $adjectiveSaved = false;
 
         $nameAlreadyThere = false;
         $adjectiveAlreadyThere = false;
+        
+        $nameTooLong = false;
+        $adjectiveTooLong = false;
+        
+        if (strlen($_POST['adjective']) > $MAX_LENGTH) {
+            $adjectiveTooLong = true;
+        }
+        
+        if (strlen($_POST['name']) > $MAX_LENGTH) {
+            $nameTooLong = true;
+        }
 
-        if (strlen($_POST['adjective']) > 0) {
+        if (strlen($_POST['adjective']) > 0 && !$adjectiveTooLong) {
             //Check to see if the adjective is already in the app
             $newAdjective = ucfirst(strtolower($_POST['adjective']));
             if (!in_array($newAdjective, $_SESSION['adjectives'])) {
@@ -71,7 +84,7 @@ class NameManager
             }
         }
 
-        if (strlen($_POST['name']) > 0) {
+        if (strlen($_POST['name']) > 0 && !$nameTooLong) {
             //Check to see if the name is already in the app
             $newName = ucfirst(strtolower($_POST['name']));
             if (!in_array($newName, $_SESSION['names'])) {
@@ -99,8 +112,10 @@ class NameManager
             if ($adjectiveAlreadyThere){
                 $response['msg'] =  'Saved the name, thanks! but the adjective is already there';
                 $response['status'] =  0;
-            }
-            else {
+            } elseif ($adjectiveTooLong) {
+                $response['msg'] =  'Saved the name, thanks! but the adjective is too long';
+                $response['status'] =  0;
+            } else {
                 $response['msg'] =  'Thanks!';
                 $response['status'] =  1;
             }
@@ -108,8 +123,10 @@ class NameManager
             if ($nameAlreadyThere){
                 $response['msg'] =  'Saved the adjective, thanks! but the name is already there';
                 $response['status'] =  0;
-            }
-            else {
+            } elseif ($nameTooLong) {
+                $response['msg'] =  'Saved the adjective, thanks! but the name is too long';
+                $response['status'] =  0;
+            } else {
                 $response['msg'] =  'Thanks!';
                 $response['status'] =  1;
             }
