@@ -108,6 +108,9 @@ class NameManager
         if ($nameSaved && $adjectiveSaved) {
             $response['msg'] =  'Thanks!';
             $response['status'] =  1;
+        } elseif ($adjectiveTooLong && $nameTooLong) {
+            $response['msg'] =  'Sorry, both name and adjective are too long! Enter shorter ones';
+            $response['status'] =  0;
         } elseif ($nameSaved) {
             if ($adjectiveAlreadyThere){
                 $response['msg'] =  'Saved the name, thanks! but the adjective is already there';
